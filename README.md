@@ -1,2 +1,6 @@
-# starter
-many types of starter
+# SpringSession-Redis原理
+SpringSession-Redis是为了解决分布式的session不共享问题，SpringSess ion的实现
+是通过SessionRepositoryFilter拦截器来替换原来的request和response，使用SessionRepositoryRequestWrapper
+和SessionRepositoryResponseWrapper将数据的保存和获取通过redis来实现
+
+
