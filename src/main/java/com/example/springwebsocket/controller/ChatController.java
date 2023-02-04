@@ -26,6 +26,7 @@ public class ChatController {
    */
   @MessageMapping("/message")
   public void sendMessage(Message message){
+
     simpMessagingTemplate.convertAndSendToUser(message.getFromUser(),"/message/get/"+message.getToUser(),message.getMsg()+"$"+message.getType());
 //    simpMessagingTemplate.convertAndSendToUser(message.getFromUser(),"/message/get",message.getMsg());
   }

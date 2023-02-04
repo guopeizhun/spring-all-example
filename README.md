@@ -45,3 +45,53 @@ SpringSession-Redis是为了解决分布式的session不共享问题，SpringSes
     return message;
   }
   ```
+
+### 1.3 前端
+
+``` npm i vue-beautiful-chat```
+``` npm install stompjs```
+```npm install sockjs-client```
+
+## SpringAMQP
+
+### 对于基本的三种交换机的使用以及队列的声明，都有相应的提及，包括ack的生产者确认和消费者的确认，具体的的丢弃消息未做处理，可以丢入死信队列让生产者消费记录失败消息
+
+### 对于生产者与消费者，rabbbitMq主要队列如下
+- 一对一，一个生产者对应一个消费者。
+- 一对多，一个生产者对应多个消费者，多个消费者共同消费一个队列的消息
+- 订阅模式（广播），需要每个消费者都有独自的队列，实现如下
+```
+ @Bean
+    public FanoutExchange fanoutExchange(){
+        return ExchangeBuilder.fanoutExchange(FANOUT_EXCHANGE).build();
+    }
+
+    @Bean
+    public Queue fanoutQueue1() {
+        return QueueBuilder.nonDurable(FANOUT_QUEUE1).build();
+    }
+
+    @Bean
+    public Queue fanoutQueue2() {
+        return QueueBuilder.nonDurable(FANOUT_QUEUE2).build();
+    }
+
+    @Bean
+    public Binding fanoutBinding1() {
+        return BindingBuilder.bind(fanoutQueue1()).to(fanoutExchange());
+    }
+    @Bean
+    public Binding fanoutBinding2() {
+        return BindingBuilder.bind(fanoutQueue2()).to(fanoutExchange());
+    }
+
+
+```
+- 路由模式，是订阅模式的升级，在订阅的基础上增加routingKey来匹配消费者
+```
+ @Bean
+    public Binding simpleBinding() {
+        return BindingBuilder.bind(simpleQueue()).to(simpleExchange()).with(SIMPLE_QUEUE);
+    }
+```
+- 通配符模式,是在路由模式的升级，能够允许通配routingkey来匹配消费者,#代表能匹配一个或多个（topic.#->topic.work.order） ,\*代表能匹配一个(topic.*->topic.work)
