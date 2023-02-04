@@ -22,7 +22,7 @@ SpringSession-Redis是为了解决分布式的session不共享问题，SpringSes
 
     }
 ```
-
+-----------
 ## Spring websocket
 
 (这些都是通过订阅通道进行，这里结合了点对点聊天完成，前端使用vue，文件为demo.zip)
@@ -51,8 +51,8 @@ SpringSession-Redis是为了解决分布式的session不共享问题，SpringSes
 ``` npm i vue-beautiful-chat```
 ``` npm install stompjs```
 ```npm install sockjs-client```
-
-## SpringAMQP
+------------------
+## SpringAMQP基本的使用操作
 
 ### 对于基本的三种交换机的使用以及队列的声明，都有相应的提及，包括ack的生产者确认和消费者的确认，具体的的丢弃消息未做处理，可以丢入死信队列让生产者消费记录失败消息
 
