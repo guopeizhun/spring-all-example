@@ -23,3 +23,5 @@
 hs_err_pid*
 target
 .idea
+./src/main/java/com/example/hutool/
+./src/main/java/com/example/core/
